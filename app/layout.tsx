@@ -103,7 +103,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="antialiased" style={{ background: "var(--bg-base)" }}>
+      <body className="antialiased" spellCheck={false} style={{ background: "var(--bg-base)" }}>
         {children}
         <Analytics />
       </body>
