@@ -5,51 +5,44 @@ import type { ExchangeConfig } from "@/lib/referrals";
 import { trackExchangeClick } from "@/lib/analytics";
 
 const COMPARE_ROWS = [
-  { label: "ê°ì ë³´ëì¤", key: "bonus" },
-  { label: "ììë£ í ì¸", key: "feeDiscount", suffix: " í ì¸" },
-  { label: "24h ê±°ëë", key: "volume24h" },
-  { label: "ê°ìì ì", key: "users" },
+  { label: "가입 보너스", key: "bonus" },
+  { label: "수수료 할인", key: "feeDiscount", suffix: " 할인" },
+  { label: "24h 거래량", key: "volume24h" },
+  { label: "가입자 수", key: "users" },
 ];
 
 export default function ExchangeComparison() {
   return (
     <section className="py-10 pb-20" id="exchange" style={{ background: "var(--bg-base)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* ì¹ì í¤ë */}
         <div className="text-center mb-8">
-          <span className="badge badge-orange mb-3">ð ë¦¬í¼ë´ íí</span>
+          <span className="badge badge-orange mb-3">🎁 리퍼럴 혜택</span>
           <h2 className="text-xl sm:text-2xl font-black text-white mt-2">
-            ê±°ëì ê°ì íí ë¹êµ
+            거래소 가입 혜택 비교
           </h2>
           <p className="text-sm mt-2 max-w-md mx-auto" style={{ color: "#94a3b8" }}>
-            ë¦¬í¼ë´ ë§í¬ë¡ ê°ìíë©´ ììë£ í ì¸ + ë³´ëì¤ë¥¼ ëìì ë°ì ì ìì´ì.
+            리퍼럴 링크로 가입하면 수수료 할인 + 보너스를 동시에 받을 수 있어요.
           </p>
         </div>
 
-        {/* ê±°ëì ì¹´ë ê·¸ë¦¬ë */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           {EXCHANGES.map((ex, idx) => (
             <ExchangeCard key={ex.id} exchange={ex} delay={idx * 0.05} />
           ))}
         </div>
 
-        {/* ë¹êµ íì´ë¸ */}
         <CompareTable />
-
-        {/* FAQ ìì­ */}
         <FAQSection />
 
-        {/* ë©´ì± ê³ ì§ */}
         <p className="text-center text-xs mt-6" style={{ color: "#374151" }}>
-          * ì ííì ë¦¬í¼ë´ ë§í¬ ê°ì ê¸°ì¤ì´ë©°, ê±°ëì ì ì±ì ë°ë¼ ë³ê²½ë  ì ììµëë¤.
-          í¬ìë ë³¸ì¸ ì±ì íì ì ì¤íê² ê²°ì íì¸ì.
+          * 위 혜택은 리퍼럴 링크 가입 기준이며, 거래소 정책에 따라 변경될 수 있습니다.
+          투자는 본인 책임 하에 신중하게 결정하세요.
         </p>
       </div>
     </section>
   );
 }
 
-// âââ ê°ë³ ê±°ëì ì¹´ë âââââââââââââââââââââââââââââââââââââââââââââ
 function ExchangeCard({ exchange: ex, delay }: { exchange: ExchangeConfig; delay: number }) {
   const url = getReferralUrl(ex.id, "compare");
 
@@ -71,7 +64,6 @@ function ExchangeCard({ exchange: ex, delay }: { exchange: ExchangeConfig; delay
         />
       )}
 
-      {/* í¤ë */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
           <div
@@ -97,7 +89,6 @@ function ExchangeCard({ exchange: ex, delay }: { exchange: ExchangeConfig; delay
         </span>
       </div>
 
-      {/* ë³´ëì¤ íì´ë¼ì´í¸ */}
       <div
         className="px-4 py-3 rounded-xl mb-4"
         style={{ background: ex.colorDim, border: `1px solid ${ex.borderColor}` }}
@@ -105,11 +96,10 @@ function ExchangeCard({ exchange: ex, delay }: { exchange: ExchangeConfig; delay
         <p className="text-xs mb-0.5" style={{ color: "#94a3b8" }}>{ex.bonusDetail}</p>
         <p className="text-2xl font-black num" style={{ color: ex.color }}>{ex.bonus}</p>
         <p className="text-xs mt-1" style={{ color: "#64748b" }}>
-          + ììë£ {ex.feeDiscount} í ì¸
+          + 수수료 {ex.feeDiscount} 할인
         </p>
       </div>
 
-      {/* ê¸°ë¥ ëª©ë¡ */}
       <div className="flex flex-col gap-1.5 mb-4 flex-1">
         {ex.features.map((f) => (
           <div key={f} className="flex items-center gap-2">
@@ -121,20 +111,18 @@ function ExchangeCard({ exchange: ex, delay }: { exchange: ExchangeConfig; delay
         ))}
       </div>
 
-      {/* ì¥ì  */}
       <div
         className="flex flex-col gap-1 mb-4 pt-3"
         style={{ borderTop: "1px solid var(--border-color)" }}
       >
         {ex.pros.map((p) => (
           <div key={p} className="flex items-start gap-1.5">
-            <span className="text-xs mt-0.5" style={{ color: "#22c55e" }}>â</span>
+            <span className="text-xs mt-0.5" style={{ color: "#22c55e" }}>✓</span>
             <span className="text-xs" style={{ color: "#64748b" }}>{p}</span>
           </div>
         ))}
       </div>
 
-      {/* CTA ë²í¼ */}
       <a
         href={url}
         target="_blank"
@@ -151,7 +139,7 @@ function ExchangeCard({ exchange: ex, delay }: { exchange: ExchangeConfig; delay
         onMouseLeave={(e) => (e.currentTarget.style.filter = "brightness(1)")}
         onClick={() => trackExchangeClick(ex.id, "compare_card")}
       >
-        {ex.name} ê°ìíê¸°
+        {ex.name} 가입하기
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
           <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -160,7 +148,6 @@ function ExchangeCard({ exchange: ex, delay }: { exchange: ExchangeConfig; delay
   );
 }
 
-// âââ ë¹êµ íì´ë¸ ââââââââââââââââââââââââââââââââââââââââââââââââââ
 function CompareTable() {
   return (
     <div
@@ -176,7 +163,7 @@ function CompareTable() {
           color: "#64748b",
         }}
       >
-        <div>í­ëª©</div>
+        <div>항목</div>
         {EXCHANGES.map((ex) => (
           <div key={ex.id} className="text-center" style={{ color: ex.color }}>
             {ex.emoji} {ex.name}
@@ -210,7 +197,6 @@ function CompareTable() {
         </div>
       ))}
 
-      {/* ê°ì ë²í¼ í */}
       <div
         className="grid gap-2 px-4 py-3"
         style={{
@@ -220,7 +206,7 @@ function CompareTable() {
         }}
       >
         <div className="flex items-center text-xs font-medium" style={{ color: "#64748b" }}>
-          ë°ë¡ ê°ì
+          바로 가입
         </div>
         {EXCHANGES.map((ex) => (
           <div key={ex.id} className="flex justify-center">
@@ -240,7 +226,7 @@ function CompareTable() {
               onMouseLeave={(e) => (e.currentTarget.style.filter = "brightness(1)")}
               onClick={() => trackExchangeClick(ex.id, "compare_table")}
             >
-              ê°ì
+              가입
             </a>
           </div>
         ))}
@@ -249,26 +235,25 @@ function CompareTable() {
   );
 }
 
-// âââ FAQ ì¹ì ââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function FAQSection() {
   const faqs = [
     {
-      q: "ë¦¬í¼ë´ ë§í¬ë¡ ê°ìíë©´ ë­ê° ë¤ë¥¸ê°ì?",
-      a: "ì¼ë° ê°ì ëë¹ ììë£ í ì¸ + ì¶ê° ë³´ëì¤ë¥¼ ë°ì ì ììµëë¤. ëì¼í ê±°ëìì´ì§ë§ ë ì ë¦¬í ì¡°ê±´ì¼ë¡ ììí  ì ìì´ì.",
+      q: "리퍼럴 링크로 가입하면 뭐가 다른가요?",
+      a: "일반 가입 대비 수수료 할인 + 추가 보너스를 받을 수 있습니다. 동일한 거래소이지만 더 유리한 조건으로 시작할 수 있어요.",
     },
     {
-      q: "ì´ë¤ ê±°ëìë¥¼ ë¨¼ì  ê°ìí´ì¼ íëì?",
-      a: "ì²ìì´ë¼ë©´ UIê° ì§ê´ì ì¸ Bybitì ì¶ì²í©ëë¤. ë³´ëì¤ë ìµë $30,000ì¼ë¡ ê°ì¥ í¬ê³ , íêµ­ì´ ì§ìë ì°ìí©ëë¤.",
+      q: "어떤 거래소를 먼저 가입해야 하나요?",
+      a: "처음이라면 UI가 직관적인 Bybit을 추천합니다. 보너스도 최대 $30,000으로 가장 크고, 한국어 지원도 우수합니다.",
     },
     {
-      q: "ì¬ë¬ ê±°ëìì ëìì ê°ìí´ë ëëì?",
-      a: "ë¤, ê° ê±°ëìë§ë¤ ëë¦½ì ì¼ë¡ ê°ì ííì ë°ì ì ììµëë¤. ë¶ì° ë³´ê´ ê´ì ììë ì¬ë¬ ê±°ëìë¥¼ íì©íë ê²ì´ ìì í©ëë¤.",
+      q: "여러 거래소에 동시에 가입해도 되나요?",
+      a: "네, 각 거래소마다 독립적으로 가입 혜택을 받을 수 있습니다. 분산 보관 관점에서도 여러 거래소를 활용하는 것이 안전합니다.",
     },
   ];
 
   return (
     <div className="mt-4">
-      <h3 className="text-sm font-bold text-white mb-3">ìì£¼ ë¬»ë ì§ë¬¸</h3>
+      <h3 className="text-sm font-bold text-white mb-3">자주 묻는 질문</h3>
       <div className="flex flex-col gap-2">
         {faqs.map((faq, i) => (
           <div
