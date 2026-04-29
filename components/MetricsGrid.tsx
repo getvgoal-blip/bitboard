@@ -31,7 +31,7 @@ export default function MetricsGrid() {
         <div className="flex items-center justify-between mb-5">
           <div>
             <h2 className="text-base font-bold text-white">핵심 시장 지표</h2>
-            <p className="text-xs mt-0.5" style={{ color: "#94a3b8" }}>BTC 투자 판단에 필요한 6가지 핵심 지표</p>
+            <p className="text-xs mt-0.5" style={{ color: "#cbd5e1" }}>BTC 투자 판단에 필요한 6가지 핵심 지표</p>
           </div>
           <span className="text-xs" style={{ color: "#94a3b8" }}>실시간 데이터</span>
         </div>
@@ -66,12 +66,13 @@ function FearGreedCard({ data, isLoading }: { data: FearGreedData | null; isLoad
   const x2 = cx + radius * Math.cos(endAngle);
   const y2 = cy + radius * Math.sin(endAngle);
   const largeArc = val > 50 ? 1 : 0;
+
   return (
     <div className="card fade-in">
       <div className="flex items-start justify-between mb-3">
         <div>
           <p className="text-xs font-semibold text-white">공포 &amp; 탐욕 지수</p>
-          <p className="text-xs mt-0.5" style={{ color: "#94a3b8" }}>0 (극공포) ~ 100 (극탐욕)</p>
+          <p className="text-xs mt-0.5" style={{ color: "#cbd5e1" }}>0 (극공포) ~ 100 (극탐욕)</p>
         </div>
         {isLoading ? <Sk w={60} h={22} /> : (
           <span className="badge" style={{ background: isUp ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.1)", color: isUp ? "#22c55e" : "#ef4444", border: `1px solid ${isUp ? "#22c55e33" : "#ef444433"}` }}>
@@ -116,16 +117,17 @@ function ETFCard({ data, isLoading }: { data: ETFData | null; isLoading: boolean
   const isPositive = data?.isPositive ?? true;
   const netColor = isPositive ? "#22c55e" : "#ef4444";
   const isFallback = data?.dataSource === "fallback";
+
   return (
     <div className="card fade-in" style={{ animationDelay: "0.05s" }}>
       <div className="flex items-start justify-between mb-3">
         <div>
           <p className="text-xs font-semibold text-white">BTC ETF 유입/유출</p>
-          <p className="text-xs mt-0.5" style={{ color: "#94a3b8" }}>뫎:��鳯2��ޫ찄 BTC ETF 일일 자금 흐름</p>
+          <p className="text-xs mt-0.5" style={{ color: "#cbd5e1" }}>미국 현물 BTC ETF 일일 자금 흐름</p>
         </div>
-        {isLoading ? <Sk w={60} h={22} /> : (
+        {isLoading ? <Sk w={60} h={22} /> < : (
           <span className="badge" style={{ background: isPositive ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.1)", color: netColor, border: `1px solid ${netColor}33` }}>
-            {isPositive ? "▲ 유입" : "▼ 유출"}
+            {isPositive ? "▲ _t��입" : "▼ 유출"}
           </span>
         )}
       </div>
@@ -186,12 +188,13 @@ function DominanceCard({ data, isLoading }: { data: GlobalMarketData | null; isL
     { label: "ETH", value: ethDom, color: "#818cf8" },
     { label: "기타", value: parseFloat(otherDom.toFixed(1)), color: "#1e1e30" },
   ];
+
   return (
     <div className="card fade-in" style={{ animationDelay: "0.1s" }}>
       <div className="flex items-start justify-between mb-3">
         <div>
           <p className="text-xs font-semibold text-white">BTC 도미넌스</p>
-          <p className="text-xs mt-0.5" style={{ color: "#94a3b8" }}>전체 코인 시쬝 대비 BTC 비중</p>
+          <p className="text-xs mt-0.5" style={{ color: "#cbd5e1" }}>전체 코인 시총 대비 BTC 비중</p>
         </div>
         {isLoading ? <Sk w={60} h={22} /> : (
           <span className="badge" style={{ background: btcDom > 55 ? "rgba(247,147,26,0.1)" : "rgba(129,140,248,0.1)", color: dominanceColor, border: `1px solid ${dominanceColor}33` }}>
@@ -210,7 +213,7 @@ function DominanceCard({ data, isLoading }: { data: GlobalMarketData | null; isL
                   style={{ transition: "stroke-dashoffset 1s ease" }} />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-lg font-black num" style={{ color: dominanceColor }}>{brtcDom.toFixed(1)}%</span>
+                <span className="text-lg font-black num" style={{ color: dominanceColor }}>{btcDom.toFixed(1)}%</span>
               </div>
             </>
           )}
@@ -247,12 +250,13 @@ function AltSeasonCard({ data, isLoading }: { data: GlobalMarketData | null; isL
     { label: "중립",     range: "25-74", color: "#eab308", active: !isBTCSeason && !isAltSeason },
     { label: "알트 시즌", range: "75+",  color: "#818cf8", active: isAltSeason },
   ];
+
   return (
     <div className="card fade-in" style={{ animationDelay: "0.15s" }}>
       <div className="flex items-start justify-between mb-3">
         <div>
           <p className="text-xs font-semibold text-white">알트코인 시즌 지수</p>
-          <p className="text-xs mt-0.5" style={{ color: "#94a3b8" }}>75 이상 = 알트 시즌 / 25 미만 = BTC 시즌</p>
+          <p className="text-xs mt-0.5" style={{ color: "#cbd5e1" }}>75 이상 = 알트 시즌 / 25 미만 = BTC 시즌</p>
         </div>
         {isLoading ? <Sk w={70} h={22} /> : (
           <span className="badge" style={{ background: `${color}1a`, color, border: `1px solid ${color}33` }}>{label}</span>
@@ -287,7 +291,7 @@ function AltSeasonCard({ data, isLoading }: { data: GlobalMarketData | null; isL
   );
 }
 
-function DXYCard({ data, isLoading }: { data: DXYDAa| null; isLoading: boolean }) {
+function DXYCard({ data, isLoading }: { data: DXYData | null; isLoading: boolean }) {
   const value = data?.value ?? 0;
   const change = data?.changePercent ?? 0;
   const isDown = change < 0;
@@ -297,13 +301,14 @@ function DXYCard({ data, isLoading }: { data: DXYDAa| null; isLoading: boolean 
   const max = Math.max(...points);
   const range = max - min || 1;
   const toY = (v: number) => 40 - ((v - min) / range) * 30;
-  const pathD = points.map((v, i) => `${i === 0 ? "M" : "L"} ${(h / Math.max(points.length - 1, 1)) * 120} ${toY(v)}`).join(" ");
+  const pathD = points.map((v, i) => `${i === 0 ? "M" : "L"} ${(i / Math.max(points.length - 1, 1)) * 120} ${toY(v)}`).join(" ");
+
   return (
     <div className="card fade-in" style={{ animationDelay: "0.2s" }}>
       <div className="flex items-start justify-between mb-3">
         <div>
           <p className="text-xs font-semibold text-white">DXY 달러 인덱스</p>
-          <p className="text-xs mt-0.5" style={{ color: "#94a3b8" }}>하락 시 BTC에 유리 · 상승 시 불리</p>
+          <p className="text-xs mt-0.5" style={{ color: "#cbd5e1" }}>하락 시 BTC에 유리 · 상승 시 불리</p>
         </div>
         {isLoading ? <Sk w={64} h={22} /> : (
           <span className="badge" style={{ background: `${changeColor}1a`, color: changeColor, border: `1px solid ${changeColor}33` }}>
@@ -353,6 +358,7 @@ function HalvingCard({ data, isLoading }: { data: HalvingData | null; isLoading:
     { label: "시", value: data?.hoursLeft ?? 0 },
     { label: "분", value: data?.minutesLeft ?? 0 },
   ];
+
   return (
     <div className="card fade-in" style={{ animationDelay: "0.25s", background: "linear-gradient(135deg, #13131f 0%, #1a1229 100%)", borderColor: "rgba(247,147,26,0.15)" }}>
       <div className="absolute inset-0 pointer-events-none rounded-2xl overflow-hidden" style={{ background: "radial-gradient(ellipse at top right, rgba(247,147,26,0.06), transparent 60%)" }} />
@@ -360,7 +366,7 @@ function HalvingCard({ data, isLoading }: { data: HalvingData | null; isLoading:
         <div className="flex items-start justify-between mb-3">
           <div>
             <p className="text-xs font-semibold text-white">다음 반감기</p>
-            <p className="text-xs mt-0.5" style={{ color: "#94a3b8" }}>블록 1,050,000 돓달 시 (로컬 계쁀0฼</p>
+            <p className="text-xs mt-0.5" style={{ color: "#cbd5e1" }}>블록 1,050,000 도달 시 (로컬 계산)</p>
           </div>
           <span className="badge badge-orange">2028년 예정</span>
         </div>
@@ -379,7 +385,7 @@ function HalvingCard({ data, isLoading }: { data: HalvingData | null; isLoading:
         </div>
         <div className="mb-3">
           <div className="flex justify-between text-xs mb-1.5" style={{ color: "#94a3b8" }}>
-            <span>2024.04.19 직 전 반감기</span>
+            <span>2024.04.19 직전 반감기</span>
             {data && <span className="num" style={{ color: "#f7931a" }}>{data.progressPercent}% 경과</span>}
           </div>
           <div className="h-2 rounded-full overflow-hidden" style={{ background: "#1e1e30" }}>
