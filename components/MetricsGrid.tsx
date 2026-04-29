@@ -6,7 +6,15 @@ import type { ETFData } from "@/app/api/etf/route";
 
 function Sk({ w, h, radius = 8, style }: { w: number | string; h: number; radius?: number; style?: React.CSSProperties }) {
   return (
-    <div style={{ width: w, height: h, borderRadius: radius, background: "linear-gradient(90deg, #1e1e30 25%, #25253a 50%, #1e1e30 75%)", backgroundSize: "200% 100%", animation: "shimmer 1.5s infinite", ...style }} />
+    <div
+      style={{
+        width: w, height: h, borderRadius: radius,
+        background: "linear-gradient(90deg, #1e1e30 25%, #25253a 50%, #1e1e30 75%)",
+        backgroundSize: "200% 100%",
+        animation: "shimmer 1.5s infinite",
+        ...style,
+      }}
+    />
   );
 }
 
@@ -23,9 +31,9 @@ export default function MetricsGrid() {
         <div className="flex items-center justify-between mb-5">
           <div>
             <h2 className="text-base font-bold text-white">핵심 시장 지표</h2>
-            <p className="text-xs mt-0.5" style={{ color: "#64748b" }}>BTC 투자 판단에 필요한 6가지 핵심 지표</p>
+            <p className="text-xs mt-0.5" style={{ color: "#94a3b8" }}>BTC 투자 판단에 필요한 6가지 핵심 지표</p>
           </div>
-          <span className="text-xs" style={{ color: "#4a5568" }}>실시간 데이터</span>
+          <span className="text-xs" style={{ color: "#94a3b8" }}>실시간 데이터</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <FearGreedCard data={fg} isLoading={fgStatus === "loading"} />
@@ -58,13 +66,12 @@ function FearGreedCard({ data, isLoading }: { data: FearGreedData | null; isLoad
   const x2 = cx + radius * Math.cos(endAngle);
   const y2 = cy + radius * Math.sin(endAngle);
   const largeArc = val > 50 ? 1 : 0;
-
   return (
     <div className="card fade-in">
       <div className="flex items-start justify-between mb-3">
         <div>
-          <p className="text-xs font-medium" style={{ color: "#94a3b8" }}>공포 &amp; 탐욕 지수</p>
-          <p className="text-[10px] mt-0.5" style={{ color: "#4a5568" }}>0 (극공포) ~ 100 (극탐욕)</p>
+          <p className="text-xs font-semibold text-white">공포 &amp; 탐욕 지수</p>
+          <p className="text-xs mt-0.5" style={{ color: "#94a3b8" }}>0 (극공포) ~ 100 (극탐욕)</p>
         </div>
         {isLoading ? <Sk w={60} h={22} /> : (
           <span className="badge" style={{ background: isUp ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.1)", color: isUp ? "#22c55e" : "#ef4444", border: `1px solid ${isUp ? "#22c55e33" : "#ef444433"}` }}>
@@ -96,7 +103,7 @@ function FearGreedCard({ data, isLoading }: { data: FearGreedData | null; isLoad
           </div>
         </div>
       </div>
-      <div className="flex justify-between text-[10px] mt-1" style={{ color: "#4a5568" }}>
+      <div className="flex justify-between text-xs mt-1" style={{ color: "#94a3b8" }}>
         <span>0 극공포</span><span>50 중립</span><span>100 극탐욕</span>
       </div>
     </div>
@@ -109,13 +116,12 @@ function ETFCard({ data, isLoading }: { data: ETFData | null; isLoading: boolean
   const isPositive = data?.isPositive ?? true;
   const netColor = isPositive ? "#22c55e" : "#ef4444";
   const isFallback = data?.dataSource === "fallback";
-
   return (
     <div className="card fade-in" style={{ animationDelay: "0.05s" }}>
       <div className="flex items-start justify-between mb-3">
         <div>
-          <p className="text-xs font-medium" style={{ color: "#94a3b8" }}>BTC ETF 유입/유출</p>
-          <p className="text-[10px] mt-0.5" style={{ color: "#4a5568" }}>미국 현물 BTC ETF 일일 자금 흐름</p>
+          <p className="text-xs font-semibold text-white">BTC ETF 유입/유출</p>
+          <p className="text-xs mt-0.5" style={{ color: "#94a3b8" }}>뫎:��鳯2��ޫ찄 BTC ETF 일일 자금 흐름</p>
         </div>
         {isLoading ? <Sk w={60} h={22} /> : (
           <span className="badge" style={{ background: isPositive ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.1)", color: netColor, border: `1px solid ${netColor}33` }}>
@@ -129,8 +135,8 @@ function ETFCard({ data, isLoading }: { data: ETFData | null; isLoading: boolean
             <p className="text-2xl font-black num" style={{ color: netColor }}>
               {isPositive ? "+" : ""}{data?.todayNet?.toFixed(1) ?? "—"}M
             </p>
-            <p className="text-xs mt-0.5" style={{ color: "#64748b" }}>
-              오늘 순유입 · <span style={{ color: "#94a3b8" }}>{data?.consecutiveDays}일 연속 {isPositive ? "유입" : "유출"}</span>
+            <p className="text-xs mt-0.5" style={{ color: "#94a3b8" }}>
+              오늘 순유입 · <span style={{ color: "#cbd5e1" }}>{data?.consecutiveDays}일 연속 {isPositive ? "유입" : "유출"}</span>
             </p>
           </>
         )}
@@ -147,22 +153,22 @@ function ETFCard({ data, isLoading }: { data: ETFData | null; isLoading: boolean
               );
             })}
           </div>
-          <div className="flex justify-between text-[10px]" style={{ color: "#4a5568" }}>
+          <div className="flex justify-between text-xs" style={{ color: "#94a3b8" }}>
             {bars.map((bar, i) => <span key={i} className="text-center flex-1">{bar.dayLabel}</span>)}
           </div>
         </>
       ) : <Sk w="100%" h={56} />}
       <div className="grid grid-cols-2 gap-2 mt-3 pt-3" style={{ borderTop: "1px solid var(--border-color)" }}>
         <div>
-          <p className="text-[10px] mb-0.5" style={{ color: "#64748b" }}>총 유입</p>
+          <p className="text-xs mb-0.5" style={{ color: "#94a3b8" }}>총 유입</p>
           {isLoading ? <Sk w={70} h={16} /> : <p className="text-sm font-bold" style={{ color: "#22c55e" }}>+${data?.todayInflow?.toFixed(1) ?? "—"}M</p>}
         </div>
         <div>
-          <p className="text-[10px] mb-0.5" style={{ color: "#64748b" }}>총 유출</p>
+          <p className="text-xs mb-0.5" style={{ color: "#94a3b8" }}>총 유출</p>
           {isLoading ? <Sk w={70} h={16} /> : <p className="text-sm font-bold" style={{ color: "#ef4444" }}>-${data?.todayOutflow?.toFixed(1) ?? "—"}M</p>}
         </div>
       </div>
-      {isFallback && <p className="text-[10px] mt-2 text-center" style={{ color: "#374151" }}>* CoinGlass API 키 설정 시 실시간 데이터 적용</p>}
+      {isFallback && <p className="text-xs mt-2 text-center" style={{ color: "#64748b" }}>* CoinGlass API 키 설정 시 실시간 데이터 적용</p>}
     </div>
   );
 }
@@ -180,13 +186,12 @@ function DominanceCard({ data, isLoading }: { data: GlobalMarketData | null; isL
     { label: "ETH", value: ethDom, color: "#818cf8" },
     { label: "기타", value: parseFloat(otherDom.toFixed(1)), color: "#1e1e30" },
   ];
-
   return (
     <div className="card fade-in" style={{ animationDelay: "0.1s" }}>
       <div className="flex items-start justify-between mb-3">
         <div>
-          <p className="text-xs font-medium" style={{ color: "#94a3b8" }}>BTC 도미넌스</p>
-          <p className="text-[10px] mt-0.5" style={{ color: "#4a5568" }}>전체 코인 시총 대비 BTC 비중</p>
+          <p className="text-xs font-semibold text-white">BTC 도미넌스</p>
+          <p className="text-xs mt-0.5" style={{ color: "#94a3b8" }}>전체 코인 시쬝 대비 BTC 비중</p>
         </div>
         {isLoading ? <Sk w={60} h={22} /> : (
           <span className="badge" style={{ background: btcDom > 55 ? "rgba(247,147,26,0.1)" : "rgba(129,140,248,0.1)", color: dominanceColor, border: `1px solid ${dominanceColor}33` }}>
@@ -205,7 +210,7 @@ function DominanceCard({ data, isLoading }: { data: GlobalMarketData | null; isL
                   style={{ transition: "stroke-dashoffset 1s ease" }} />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-lg font-black num" style={{ color: dominanceColor }}>{btcDom.toFixed(1)}%</span>
+                <span className="text-lg font-black num" style={{ color: dominanceColor }}>{brtcDom.toFixed(1)}%</span>
               </div>
             </>
           )}
@@ -239,16 +244,15 @@ function AltSeasonCard({ data, isLoading }: { data: GlobalMarketData | null; isL
   const color = isBTCSeason ? "#f7931a" : isAltSeason ? "#818cf8" : "#eab308";
   const zones = [
     { label: "BTC 시즌", range: "0-24", color: "#f7931a", active: isBTCSeason },
-    { label: "중립", range: "25-74", color: "#eab308", active: !isBTCSeason && !isAltSeason },
-    { label: "알트 시즌", range: "75+", color: "#818cf8", active: isAltSeason },
+    { label: "중립",     range: "25-74", color: "#eab308", active: !isBTCSeason && !isAltSeason },
+    { label: "알트 시즌", range: "75+",  color: "#818cf8", active: isAltSeason },
   ];
-
   return (
     <div className="card fade-in" style={{ animationDelay: "0.15s" }}>
       <div className="flex items-start justify-between mb-3">
         <div>
-          <p className="text-xs font-medium" style={{ color: "#94a3b8" }}>알트코인 시즌 지수</p>
-          <p className="text-[10px] mt-0.5" style={{ color: "#4a5568" }}>75 이상 = 알트 시즌 / 25 미만 = BTC 시즌</p>
+          <p className="text-xs font-semibold text-white">알트코인 시즌 지수</p>
+          <p className="text-xs mt-0.5" style={{ color: "#94a3b8" }}>75 이상 = 알트 시즌 / 25 미만 = BTC 시즌</p>
         </div>
         {isLoading ? <Sk w={70} h={22} /> : (
           <span className="badge" style={{ background: `${color}1a`, color, border: `1px solid ${color}33` }}>{label}</span>
@@ -256,7 +260,7 @@ function AltSeasonCard({ data, isLoading }: { data: GlobalMarketData | null; isL
       </div>
       <div className="mb-4">
         {isLoading ? <Sk w={80} h={40} /> : (
-          <><p className="text-3xl font-black num" style={{ color }}>{val}</p><p className="text-xs mt-0.5" style={{ color: "#64748b" }}>/ 100</p></>
+          <><p className="text-3xl font-black num" style={{ color }}>{val}</p><p className="text-xs mt-0.5" style={{ color: "#94a3b8" }}>/ 100</p></>
         )}
       </div>
       <div className="mb-4">
@@ -266,7 +270,7 @@ function AltSeasonCard({ data, isLoading }: { data: GlobalMarketData | null; isL
           <div className="absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full border-2 border-white shadow-lg transition-all duration-700"
             style={{ left: `calc(${val}% - 8px)`, background: color }} />
         </div>
-        <div className="flex justify-between text-[10px] mt-1" style={{ color: "#4a5568" }}>
+        <div className="flex justify-between text-xs mt-1" style={{ color: "#94a3b8" }}>
           <span>BTC 시즌</span><span>중립</span><span>알트 시즌</span>
         </div>
       </div>
@@ -274,8 +278,8 @@ function AltSeasonCard({ data, isLoading }: { data: GlobalMarketData | null; isL
         {zones.map((zone) => (
           <div key={zone.label} className="flex-1 px-2 py-1.5 rounded-lg text-center"
             style={{ background: zone.active ? `${zone.color}18` : "var(--bg-elevated)", border: `1px solid ${zone.active ? zone.color + "40" : "transparent"}` }}>
-            <p className="text-[10px] font-semibold" style={{ color: zone.active ? zone.color : "#4a5568" }}>{zone.label}</p>
-            <p className="text-[9px]" style={{ color: zone.active ? zone.color + "aa" : "#374151" }}>{zone.range}</p>
+            <p className="text-xs font-semibold" style={{ color: zone.active ? zone.color : "#94a3b8" }}>{zone.label}</p>
+            <p className="text-[10px]" style={{ color: zone.active ? zone.color + "aa" : "#64748b" }}>{zone.range}</p>
           </div>
         ))}
       </div>
@@ -283,7 +287,7 @@ function AltSeasonCard({ data, isLoading }: { data: GlobalMarketData | null; isL
   );
 }
 
-function DXYCard({ data, isLoading }: { data: DXYData | null; isLoading: boolean }) {
+function DXYCard({ data, isLoading }: { data: DXYDAa| null; isLoading: boolean }) {
   const value = data?.value ?? 0;
   const change = data?.changePercent ?? 0;
   const isDown = change < 0;
@@ -293,14 +297,13 @@ function DXYCard({ data, isLoading }: { data: DXYData | null; isLoading: boolean
   const max = Math.max(...points);
   const range = max - min || 1;
   const toY = (v: number) => 40 - ((v - min) / range) * 30;
-  const pathD = points.map((v, i) => `${i === 0 ? "M" : "L"} ${(i / Math.max(points.length - 1, 1)) * 120} ${toY(v)}`).join(" ");
-
+  const pathD = points.map((v, i) => `${i === 0 ? "M" : "L"} ${(h / Math.max(points.length - 1, 1)) * 120} ${toY(v)}`).join(" ");
   return (
     <div className="card fade-in" style={{ animationDelay: "0.2s" }}>
       <div className="flex items-start justify-between mb-3">
         <div>
-          <p className="text-xs font-medium" style={{ color: "#94a3b8" }}>DXY 달러 인덱스</p>
-          <p className="text-[10px] mt-0.5" style={{ color: "#4a5568" }}>하락 시 BTC에 유리 · 상승 시 불리</p>
+          <p className="text-xs font-semibold text-white">DXY 달러 인덱스</p>
+          <p className="text-xs mt-0.5" style={{ color: "#94a3b8" }}>하락 시 BTC에 유리 · 상승 시 불리</p>
         </div>
         {isLoading ? <Sk w={64} h={22} /> : (
           <span className="badge" style={{ background: `${changeColor}1a`, color: changeColor, border: `1px solid ${changeColor}33` }}>
@@ -312,7 +315,7 @@ function DXYCard({ data, isLoading }: { data: DXYData | null; isLoading: boolean
         {isLoading ? <Sk w={100} h={40} /> : (
           <>
             <p className="text-3xl font-black num text-white">{value.toFixed(2)}</p>
-            {data && <p className="text-xs mt-0.5" style={{ color: "#64748b" }}>고 {data.high} · 저 {data.low}</p>}
+            {data && <p className="text-xs mt-0.5" style={{ color: "#94a3b8" }}>고 {data.high} · 저 {data.low}</p>}
           </>
         )}
       </div>
@@ -331,7 +334,7 @@ function DXYCard({ data, isLoading }: { data: DXYData | null; isLoading: boolean
             </>
           )}
         </svg>
-        <div className="flex justify-between text-[10px] mt-0.5" style={{ color: "#374151" }}>
+        <div className="flex justify-between text-xs mt-0.5" style={{ color: "#64748b" }}>
           <span>7일 전</span><span>오늘</span>
         </div>
       </div>
@@ -350,15 +353,14 @@ function HalvingCard({ data, isLoading }: { data: HalvingData | null; isLoading:
     { label: "시", value: data?.hoursLeft ?? 0 },
     { label: "분", value: data?.minutesLeft ?? 0 },
   ];
-
   return (
     <div className="card fade-in" style={{ animationDelay: "0.25s", background: "linear-gradient(135deg, #13131f 0%, #1a1229 100%)", borderColor: "rgba(247,147,26,0.15)" }}>
       <div className="absolute inset-0 pointer-events-none rounded-2xl overflow-hidden" style={{ background: "radial-gradient(ellipse at top right, rgba(247,147,26,0.06), transparent 60%)" }} />
       <div className="relative">
         <div className="flex items-start justify-between mb-3">
           <div>
-            <p className="text-xs font-medium" style={{ color: "#94a3b8" }}>다음 반감기</p>
-            <p className="text-[10px] mt-0.5" style={{ color: "#4a5568" }}>블록 1,050,000 도달 시 (로컬 계산)</p>
+            <p className="text-xs font-semibold text-white">다음 반감기</p>
+            <p className="text-xs mt-0.5" style={{ color: "#94a3b8" }}>블록 1,050,000 돓달 시 (로컬 계쁀0฼</p>
           </div>
           <span className="badge badge-orange">2028년 예정</span>
         </div>
@@ -369,22 +371,22 @@ function HalvingCard({ data, isLoading }: { data: HalvingData | null; isLoading:
               {isLoading ? <Sk w={40} h={30} /> : (
                 <>
                   <span className="text-2xl font-black num leading-none" style={{ color: "#f7931a" }}>{unit.value}</span>
-                  <span className="text-[10px] font-medium mt-1" style={{ color: "#94a3b8" }}>{unit.label}</span>
+                  <span className="text-xs font-medium mt-1" style={{ color: "#94a3b8" }}>{unit.label}</span>
                 </>
               )}
             </div>
           ))}
         </div>
         <div className="mb-3">
-          <div className="flex justify-between text-[10px] mb-1.5" style={{ color: "#64748b" }}>
-            <span>2024.04.19 직전 반감기</span>
+          <div className="flex justify-between text-xs mb-1.5" style={{ color: "#94a3b8" }}>
+            <span>2024.04.19 직 전 반감기</span>
             {data && <span className="num" style={{ color: "#f7931a" }}>{data.progressPercent}% 경과</span>}
           </div>
           <div className="h-2 rounded-full overflow-hidden" style={{ background: "#1e1e30" }}>
             <div className="h-full rounded-full transition-all duration-1000"
               style={{ width: `${data?.progressPercent ?? 0}%`, background: "linear-gradient(90deg, #f7931a, #e8830a)" }} />
           </div>
-          <div className="flex justify-between text-[10px] mt-1" style={{ color: "#4a5568" }}>
+          <div className="flex justify-between text-xs mt-1" style={{ color: "#94a3b8" }}>
             <span>840,000 블록</span>
             {data && <span className="num">현재 ~{data.blockHeight.toLocaleString()}</span>}
           </div>
