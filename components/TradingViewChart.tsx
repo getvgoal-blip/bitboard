@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function TradingViewChart() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [chartLoaded, setChartLoaded] = useState(false);
 
   useEffect(() => {
-    // TradingView 위젯 스크립트 동적 로딩
     const script = document.createElement("script");
     script.src =
       "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
@@ -30,11 +30,20 @@ export default function TradingViewChart() {
       support_host: "https://www.tradingview.com",
     });
 
+    const observer = new MutationObserver(() => {
+      if (containerRef.current?.querySelector("iframe")) {
+        setChartLoaded(true);
+        observer.disconnect();
+      }
+    });
+
     if (containerRef.current) {
+      observer.observe(containerRef.current, { childList: true, subtree: true });
       containerRef.current.appendChild(script);
     }
 
     return () => {
+      observer.disconnect();
       if (containerRef.current) {
         containerRef.current.innerHTML = "";
       }
@@ -44,7 +53,6 @@ export default function TradingViewChart() {
   return (
     <section className="py-6" id="차트">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* 섹션 헤더 */}
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-base font-bold text-white">실시간 BTC 차트</h2>
@@ -66,23 +74,17 @@ export default function TradingViewChart() {
           </div>
         </div>
 
-        {/* 차트 컨테이너 */}
         <div
           className="relative rounded-2xl overflow-hidden"
           style={{
             height: "460px",
-            background: "var(--bg-card)",
+            background: "#13131f",
             border: "1px solid var(--border-color)",
           }}
         >
-          {/* TradingView 위젯이 로드되기 전 플레이스홀더 */}
-          <div
-            className="tradingview-widget-container w-full h-full"
-            ref={containerRef}
-          >
-            {/* 로딩 플레이스홀더 */}
+          {!chartLoaded && (
             <div
-              className="absolute inset-0 flex flex-col items-center justify-center gap-3"
+              className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10"
               style={{ background: "#13131f" }}
             >
               <div
@@ -97,7 +99,6 @@ export default function TradingViewChart() {
                   TradingView 위젯을 불러오고 있습니다
                 </p>
               </div>
-              {/* 미니 shimmer 바 */}
               <div className="flex gap-1 mt-2">
                 {[1, 2, 3].map((i) => (
                   <div
@@ -111,10 +112,14 @@ export default function TradingViewChart() {
                 ))}
               </div>
             </div>
-          </div>
+          )}
+
+          <div
+            className="tradingview-widget-container w-full h-full"
+            ref={containerRef}
+          />
         </div>
 
-        {/* 차트 하단 빠른 타임프레임 힌트 */}
         <p className="text-xs mt-2 text-center" style={{ color: "#4a5568" }}>
           차트에서 1D · 1W · 1M · 3M 등 타임프레임을 직접 선택할 수 있습니다
         </p>
