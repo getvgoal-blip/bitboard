@@ -21,19 +21,19 @@ export default function Header() {
   }, [btc?.price]);
 
   const isPositive = btc ? btc.change24h >= 0 : true;
-  const changeColor = isPositive ? "#22c55e" : "#ef4444";
+  const changeColor = isPositive ? "#0ecb81" : "#f6465d";
   const flashBg =
-    flash === "up" ? "rgba(34,197,94,0.15)" :
-    flash === "down" ? "rgba(239,68,68,0.15)" : "transparent";
+    flash === "up" ? "rgba(14,203,129,0.12)" :
+    flash === "down" ? "rgba(246,70,93,0.12)" : "transparent";
 
   return (
     <header
       className="sticky top-0 z-50 w-full"
       style={{
-        background: "rgba(13, 13, 20, 0.90)",
+        background: "rgba(11, 14, 23, 0.92)",
         backdropFilter: "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
-        borderBottom: "1px solid rgba(30, 30, 48, 0.8)",
+        borderBottom: "1px solid rgba(28, 35, 51, 0.9)",
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -42,16 +42,16 @@ export default function Header() {
           <div className="flex items-center gap-2 flex-shrink-0">
             <div
               className="w-7 h-7 rounded-lg flex items-center justify-center text-sm font-black"
-              style={{ background: "linear-gradient(135deg, #f7931a, #e8830a)" }}
+              style={{ background: "linear-gradient(135deg, #1a6fff, #00c7ff)" }}
             >
               B
             </div>
             <span className="text-white font-bold text-lg tracking-tight">
-              Bit<span style={{ color: "#f7931a" }}>Board</span>
+              Bit<span style={{ color: "#00c7ff" }}>Board</span>
             </span>
             <span
               className="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wider"
-              style={{ background: "rgba(247,147,26,0.12)", color: "#f7931a", border: "1px solid rgba(247,147,26,0.2)" }}
+              style={{ background: "rgba(0,199,255,0.1)", color: "#00c7ff", border: "1px solid rgba(0,199,255,0.2)" }}
             >
               Beta
             </span>
@@ -84,13 +84,13 @@ export default function Header() {
               <div
                 className="h-4 w-24 rounded"
                 style={{
-                  background: "linear-gradient(90deg, #1e1e30 25%, #25253a 50%, #1e1e30 75%)",
+                  background: "linear-gradient(90deg, #1c2333 25%, #243047 50%, #1c2333 75%)",
                   backgroundSize: "200% 100%",
                   animation: "shimmer 1.5s infinite",
                 }}
               />
             )}
-            <span className="w-1.5 h-1.5 rounded-full animate-pulse flex-shrink-0" style={{ background: "#22c55e" }} />
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse flex-shrink-0" style={{ background: "#0ecb81" }} />
           </div>
 
           {/* 오른쪽 액션 */}
@@ -117,7 +117,7 @@ export default function Header() {
             <a
               href="#exchange"
               className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold transition-all"
-              style={{ background: "linear-gradient(135deg, #f7931a, #e8830a)", color: "white" }}
+              style={{ background: "linear-gradient(135deg, #1a6fff, #00c7ff)", color: "white" }}
               onMouseEnter={(e) => (e.currentTarget.style.filter = "brightness(1.1)")}
               onMouseLeave={(e) => (e.currentTarget.style.filter = "brightness(1)")}
             >
@@ -169,7 +169,7 @@ export default function Header() {
               <a
                 href="#exchange"
                 className="mt-2 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-sm font-semibold"
-                style={{ background: "linear-gradient(135deg, #f7931a, #e8830a)", color: "white" }}
+                style={{ background: "linear-gradient(135deg, #1a6fff, #00c7ff)", color: "white" }}
                 onClick={() => setMenuOpen(false)}
               >
                 거래소 가입 혜택 보기 →
