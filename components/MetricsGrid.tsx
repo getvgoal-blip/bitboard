@@ -9,7 +9,7 @@ function Sk({ w, h, radius = 8, style }: { w: number | string; h: number; radius
     <div
       style={{
         width: w, height: h, borderRadius: radius,
-        background: "linear-gradient(90deg, #1e1e30 25%, #25253a 50%, #1e1e30 75%)",
+        background: "linear-gradient(90deg, #1c2333 25%, #243047 50%, #1c2333 75%)",
         backgroundSize: "200% 100%",
         animation: "shimmer 1.5s infinite",
         ...style,
@@ -50,11 +50,11 @@ export default function MetricsGrid() {
 
 function FearGreedCard({ data, isLoading }: { data: FearGreedData | null; isLoading: boolean }) {
   const getFGColor = (val: number) => {
-    if (val <= 20) return "#ef4444";
+    if (val <= 20) return "#f6465d";
     if (val <= 40) return "#f97316";
     if (val <= 60) return "#eab308";
     if (val <= 80) return "#84cc16";
-    return "#22c55e";
+    return "#0ecb81";
   };
   const val = data?.value ?? 50;
   const color = getFGColor(val);
@@ -75,7 +75,7 @@ function FearGreedCard({ data, isLoading }: { data: FearGreedData | null; isLoad
           <p className="text-xs mt-0.5" style={{ color: "#cbd5e1" }}>0 (극공포) ~ 100 (극탐욕)</p>
         </div>
         {isLoading ? <Sk w={60} h={22} /> : (
-          <span className="badge" style={{ background: isUp ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.1)", color: isUp ? "#22c55e" : "#ef4444", border: `1px solid ${isUp ? "#22c55e33" : "#ef444433"}` }}>
+          <span className="badge" style={{ background: isUp ? "rgba(14,203,129,0.1)" : "rgba(246,70,93,0.1)", color: isUp ? "#0ecb81" : "#f6465d", border: `1px solid ${isUp ? "#0ecb8133" : "#f6465d33"}` }}>
             {isUp ? "+" : ""}{change}
           </span>
         )}
@@ -83,16 +83,16 @@ function FearGreedCard({ data, isLoading }: { data: FearGreedData | null; isLoad
       <div className="flex flex-col items-center py-2">
         <div className="relative" style={{ width: 140, height: 82 }}>
           <svg viewBox="0 0 140 82" className="w-full h-full overflow-visible">
-            <path d="M 18 70 A 52 52 0 0 1 122 70" fill="none" stroke="#1e1e30" strokeWidth="10" strokeLinecap="round" />
+            <path d="M 18 70 A 52 52 0 0 1 122 70" fill="none" stroke="#1c2333" strokeWidth="10" strokeLinecap="round" />
             <defs>
               <linearGradient id="fgGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#ef4444" /><stop offset="33%" stopColor="#f97316" />
+                <stop offset="0%" stopColor="#f6465d" /><stop offset="33%" stopColor="#f97316" />
                 <stop offset="50%" stopColor="#eab308" /><stop offset="67%" stopColor="#84cc16" />
-                <stop offset="100%" stopColor="#22c55e" />
+                <stop offset="100%" stopColor="#0ecb81" />
               </linearGradient>
             </defs>
             <path d={`M 18 70 A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2}`} fill="none" stroke="url(#fgGrad)" strokeWidth="10" strokeLinecap="round" />
-            <circle cx={x2} cy={y2} r="7" fill={color} stroke="#0d0d14" strokeWidth="2" />
+            <circle cx={x2} cy={y2} r="7" fill={color} stroke="#0b0e17" strokeWidth="2" />
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-end pb-1">
             {isLoading ? <Sk w={48} h={36} /> : (
@@ -115,7 +115,7 @@ function ETFCard({ data, isLoading }: { data: ETFData | null; isLoading: boolean
   const bars = data?.weekHistory ?? [];
   const maxVal = bars.length ? Math.max(...bars.map((b) => Math.abs(b.netFlow)), 1) : 1;
   const isPositive = data?.isPositive ?? true;
-  const netColor = isPositive ? "#22c55e" : "#ef4444";
+  const netColor = isPositive ? "#0ecb81" : "#f6465d";
   const isFallback = data?.dataSource === "fallback";
 
   return (
@@ -125,9 +125,9 @@ function ETFCard({ data, isLoading }: { data: ETFData | null; isLoading: boolean
           <p className="text-xs font-semibold text-white">BTC ETF 유입/유출</p>
           <p className="text-xs mt-0.5" style={{ color: "#cbd5e1" }}>미국 현물 BTC ETF 일일 자금 흐름</p>
         </div>
-        {isLoading ? <Sk w={60} h={22} /> < : (
-          <span className="badge" style={{ background: isPositive ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.1)", color: netColor, border: `1px solid ${netColor}33` }}>
-            {isPositive ? "▲ _t��입" : "▼ 유출"}
+        {isLoading ? <Sk w={60} h={22} /> : (
+          <span className="badge" style={{ background: isPositive ? "rgba(14,203,129,0.1)" : "rgba(246,70,93,0.1)", color: netColor, border: `1px solid ${netColor}33` }}>
+            {isPositive ? "▲ 유입" : "▼ 유출"}
           </span>
         )}
       </div>
@@ -150,7 +150,7 @@ function ETFCard({ data, isLoading }: { data: ETFData | null; isLoading: boolean
               const h = (Math.abs(bar.netFlow) / maxVal) * 100;
               return (
                 <div key={i} className="flex flex-col items-center flex-1 h-full justify-end">
-                  <div className="w-full rounded-sm" style={{ height: `${Math.max(h, 4)}%`, background: bar.netFlow >= 0 ? "rgba(34,197,94,0.6)" : "rgba(239,68,68,0.6)" }} />
+                  <div className="w-full rounded-sm" style={{ height: `${Math.max(h, 4)}%`, background: bar.netFlow >= 0 ? "rgba(14,203,129,0.6)" : "rgba(246,70,93,0.6)" }} />
                 </div>
               );
             })}
@@ -163,11 +163,11 @@ function ETFCard({ data, isLoading }: { data: ETFData | null; isLoading: boolean
       <div className="grid grid-cols-2 gap-2 mt-3 pt-3" style={{ borderTop: "1px solid var(--border-color)" }}>
         <div>
           <p className="text-xs mb-0.5" style={{ color: "#94a3b8" }}>총 유입</p>
-          {isLoading ? <Sk w={70} h={16} /> : <p className="text-sm font-bold" style={{ color: "#22c55e" }}>+${data?.todayInflow?.toFixed(1) ?? "—"}M</p>}
+          {isLoading ? <Sk w={70} h={16} /> : <p className="text-sm font-bold" style={{ color: "#0ecb81" }}>+${data?.todayInflow?.toFixed(1) ?? "—"}M</p>}
         </div>
         <div>
           <p className="text-xs mb-0.5" style={{ color: "#94a3b8" }}>총 유출</p>
-          {isLoading ? <Sk w={70} h={16} /> : <p className="text-sm font-bold" style={{ color: "#ef4444" }}>-${data?.todayOutflow?.toFixed(1) ?? "—"}M</p>}
+          {isLoading ? <Sk w={70} h={16} /> : <p className="text-sm font-bold" style={{ color: "#f6465d" }}>-${data?.todayOutflow?.toFixed(1) ?? "—"}M</p>}
         </div>
       </div>
       {isFallback && <p className="text-xs mt-2 text-center" style={{ color: "#64748b" }}>* CoinGlass API 키 설정 시 실시간 데이터 적용</p>}
@@ -186,7 +186,7 @@ function DominanceCard({ data, isLoading }: { data: GlobalMarketData | null; isL
   const segments = [
     { label: "BTC", value: btcDom, color: "#f7931a" },
     { label: "ETH", value: ethDom, color: "#818cf8" },
-    { label: "기타", value: parseFloat(otherDom.toFixed(1)), color: "#1e1e30" },
+    { label: "기타", value: parseFloat(otherDom.toFixed(1)), color: "#1c2333" },
   ];
 
   return (
@@ -207,7 +207,7 @@ function DominanceCard({ data, isLoading }: { data: GlobalMarketData | null; isL
           {isLoading ? <Sk w={88} h={88} radius={44} /> : (
             <>
               <svg viewBox="0 0 88 88" className="w-full h-full -rotate-90">
-                <circle cx="44" cy="44" r={radius} fill="none" stroke="#1e1e30" strokeWidth="10" />
+                <circle cx="44" cy="44" r={radius} fill="none" stroke="#1c2333" strokeWidth="10" />
                 <circle cx="44" cy="44" r={radius} fill="none" stroke="#f7931a" strokeWidth="10"
                   strokeDasharray={circumference} strokeDashoffset={offset} strokeLinecap="round"
                   style={{ transition: "stroke-dashoffset 1s ease" }} />
@@ -268,7 +268,7 @@ function AltSeasonCard({ data, isLoading }: { data: GlobalMarketData | null; isL
         )}
       </div>
       <div className="mb-4">
-        <div className="relative h-3 rounded-full overflow-hidden" style={{ background: "#1e1e30" }}>
+        <div className="relative h-3 rounded-full overflow-hidden" style={{ background: "#1c2333" }}>
           <div className="absolute left-0 top-0 h-full" style={{ width: "25%", background: "rgba(247,147,26,0.4)" }} />
           <div className="absolute right-0 top-0 h-full" style={{ width: "25%", background: "rgba(129,140,248,0.4)" }} />
           <div className="absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full border-2 border-white shadow-lg transition-all duration-700"
@@ -295,7 +295,7 @@ function DXYCard({ data, isLoading }: { data: DXYData | null; isLoading: boolean
   const value = data?.value ?? 0;
   const change = data?.changePercent ?? 0;
   const isDown = change < 0;
-  const changeColor = isDown ? "#22c55e" : "#ef4444";
+  const changeColor = isDown ? "#0ecb81" : "#f6465d";
   const points = data?.weekHistory?.length ? data.weekHistory : [104.32];
   const min = Math.min(...points);
   const max = Math.max(...points);
@@ -345,7 +345,7 @@ function DXYCard({ data, isLoading }: { data: DXYData | null; isLoading: boolean
       </div>
       <div className="px-3 py-2 rounded-lg" style={{ background: "var(--bg-elevated)" }}>
         <p className="text-xs" style={{ color: "#94a3b8" }}>
-          BTC 영향: <span style={{ color: isDown ? "#22c55e" : "#ef4444" }}>{isDown ? "긍정적 — 달러 약세" : "부정적 — 달러 강세"}</span>
+          BTC 영향: <span style={{ color: isDown ? "#0ecb81" : "#f6465d" }}>{isDown ? "긍정적 — 달러 약세" : "부정적 — 달러 강세"}</span>
         </p>
       </div>
     </div>
@@ -360,8 +360,8 @@ function HalvingCard({ data, isLoading }: { data: HalvingData | null; isLoading:
   ];
 
   return (
-    <div className="card fade-in" style={{ animationDelay: "0.25s", background: "linear-gradient(135deg, #13131f 0%, #1a1229 100%)", borderColor: "rgba(247,147,26,0.15)" }}>
-      <div className="absolute inset-0 pointer-events-none rounded-2xl overflow-hidden" style={{ background: "radial-gradient(ellipse at top right, rgba(247,147,26,0.06), transparent 60%)" }} />
+    <div className="card fade-in" style={{ animationDelay: "0.25s", background: "linear-gradient(135deg, #131722 0%, #1a1229 100%)", borderColor: "rgba(247,147,26,0.15)" }}>
+      <div className="absolute inset-0 pointer-events-none rounded-2xl overflow-hidden" style={{ background: "radial-gradient(ellipse at top right, rgba(247,147,26,0.05), transparent 60%)" }} />
       <div className="relative">
         <div className="flex items-start justify-between mb-3">
           <div>
@@ -388,7 +388,7 @@ function HalvingCard({ data, isLoading }: { data: HalvingData | null; isLoading:
             <span>2024.04.19 직전 반감기</span>
             {data && <span className="num" style={{ color: "#f7931a" }}>{data.progressPercent}% 경과</span>}
           </div>
-          <div className="h-2 rounded-full overflow-hidden" style={{ background: "#1e1e30" }}>
+          <div className="h-2 rounded-full overflow-hidden" style={{ background: "#1c2333" }}>
             <div className="h-full rounded-full transition-all duration-1000"
               style={{ width: `${data?.progressPercent ?? 0}%`, background: "linear-gradient(90deg, #f7931a, #e8830a)" }} />
           </div>

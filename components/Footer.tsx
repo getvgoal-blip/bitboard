@@ -18,19 +18,18 @@ export default function Footer() {
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-        {/* 상단: 로고 + 링크 */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-8">
           {/* 브랜드 */}
           <div className="col-span-2 sm:col-span-1">
             <div className="flex items-center gap-2 mb-3">
               <div
                 className="w-7 h-7 rounded-lg flex items-center justify-center text-sm font-black"
-                style={{ background: "linear-gradient(135deg, #f7931a, #e8830a)" }}
+                style={{ background: "linear-gradient(135deg, #1a6fff, #00c7ff)" }}
               >
                 ₿
               </div>
               <span className="text-white font-bold text-lg tracking-tight">
-                Bit<span style={{ color: "#f7931a" }}>Board</span>
+                Bit<span style={{ color: "#00c7ff" }}>Board</span>
               </span>
             </div>
             <p className="text-xs leading-relaxed" style={{ color: "#4a5568" }}>
@@ -40,7 +39,6 @@ export default function Footer() {
               <br />
               파악할 수 있는 대시보드.
             </p>
-            {/* 소셜 링크 */}
             <div className="flex gap-2 mt-4">
               {["트위터", "텔레그램"].map((s) => (
                 <a
@@ -53,8 +51,8 @@ export default function Footer() {
                     border: "1px solid var(--border-color)",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "#f7931a";
-                    e.currentTarget.style.borderColor = "rgba(247,147,26,0.3)";
+                    e.currentTarget.style.color = "#00c7ff";
+                    e.currentTarget.style.borderColor = "rgba(0,199,255,0.3)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.color = "#64748b";
@@ -95,15 +93,11 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* 구분선 */}
         <div style={{ borderTop: "1px solid var(--border-color)" }} className="pt-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-            {/* 카피라이트 */}
             <p className="text-xs" style={{ color: "#374151" }}>
               © {currentYear} BitBoard. All rights reserved.
             </p>
-
-            {/* 면책 고지 */}
             <p
               className="text-xs text-center sm:text-right max-w-sm leading-relaxed"
               style={{ color: "#374151" }}
@@ -113,18 +107,13 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* 데이터 출처 */}
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3">
             <span className="text-[10px]" style={{ color: "#2d3748" }}>
               데이터 출처:
             </span>
             {["CoinGecko", "TradingView", "Alternative.me", "SoSo Value", "CoinMarketCap"].map(
               (source) => (
-                <span
-                  key={source}
-                  className="text-[10px]"
-                  style={{ color: "#374151" }}
-                >
+                <span key={source} className="text-[10px]" style={{ color: "#374151" }}>
                   {source}
                 </span>
               )

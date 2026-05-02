@@ -15,9 +15,8 @@ export default function ExchangeComparison() {
   return (
     <section className="py-10 pb-20" id="exchange" style={{ background: "var(--bg-base)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* 섹션 헤더 */}
         <div className="text-center mb-8">
-          <span className="badge badge-orange mb-3">🎁 리퍼럴 혜택</span>
+          <span className="badge badge-blue mb-3">🎁 리퍼럴 혜택</span>
           <h2 className="text-xl sm:text-2xl font-black text-white mt-2">
             거래소 가입 혜택 비교
           </h2>
@@ -26,20 +25,15 @@ export default function ExchangeComparison() {
           </p>
         </div>
 
-        {/* 거래소 카드 그리드 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           {EXCHANGES.map((ex, idx) => (
             <ExchangeCard key={ex.id} exchange={ex} delay={idx * 0.05} />
           ))}
         </div>
 
-        {/* 비교 테이블 */}
         <CompareTable />
-
-        {/* FAQ 영역 */}
         <FAQSection />
 
-        {/* 면책 고지 */}
         <p className="text-center text-xs mt-6" style={{ color: "#64748b" }}>
           * 위 혜택은 리퍼럴 링크 가입 기준이며, 거래소 정책에 따라 변경될 수 있습니다.
           투자는 본인 책임 하에 신중하게 결정하세요.
@@ -49,7 +43,6 @@ export default function ExchangeComparison() {
   );
 }
 
-// ─── 개별 거래소 카드 ────────────────────────────────────────────
 function ExchangeCard({ exchange: ex, delay }: { exchange: ExchangeConfig; delay: number }) {
   const url = getReferralUrl(ex.id, "compare");
 
@@ -60,7 +53,7 @@ function ExchangeCard({ exchange: ex, delay }: { exchange: ExchangeConfig; delay
         animationDelay: `${delay}s`,
         borderColor: ex.recommended ? ex.borderColor : "var(--border-color)",
         background: ex.recommended
-          ? "linear-gradient(135deg, #13131f 0%, #1a1a2e 100%)"
+          ? "linear-gradient(135deg, #131722 0%, #1a1a2e 100%)"
           : "var(--bg-card)",
       }}
     >
@@ -71,7 +64,6 @@ function ExchangeCard({ exchange: ex, delay }: { exchange: ExchangeConfig; delay
         />
       )}
 
-      {/* 헤더 */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
           <div
@@ -97,7 +89,6 @@ function ExchangeCard({ exchange: ex, delay }: { exchange: ExchangeConfig; delay
         </span>
       </div>
 
-      {/* 보너스 하이라이트 */}
       <div
         className="px-4 py-3 rounded-xl mb-4"
         style={{ background: ex.colorDim, border: `1px solid ${ex.borderColor}` }}
@@ -109,7 +100,6 @@ function ExchangeCard({ exchange: ex, delay }: { exchange: ExchangeConfig; delay
         </p>
       </div>
 
-      {/* 기능 목록 */}
       <div className="flex flex-col gap-1.5 mb-4 flex-1">
         {ex.features.map((f) => (
           <div key={f} className="flex items-center gap-2">
@@ -121,20 +111,18 @@ function ExchangeCard({ exchange: ex, delay }: { exchange: ExchangeConfig; delay
         ))}
       </div>
 
-      {/* 장점 */}
       <div
         className="flex flex-col gap-1 mb-4 pt-3"
         style={{ borderTop: "1px solid var(--border-color)" }}
       >
         {ex.pros.map((p) => (
           <div key={p} className="flex items-start gap-1.5">
-            <span className="text-xs mt-0.5" style={{ color: "#22c55e" }}>✓</span>
+            <span className="text-xs mt-0.5" style={{ color: "#0ecb81" }}>✓</span>
             <span className="text-xs" style={{ color: "#94a3b8" }}>{p}</span>
           </div>
         ))}
       </div>
 
-      {/* CTA 버튼 */}
       <a
         href={url}
         target="_blank"
@@ -160,7 +148,6 @@ function ExchangeCard({ exchange: ex, delay }: { exchange: ExchangeConfig; delay
   );
 }
 
-// ─── 비교 테이블 ──────────────────────────────────────────────────
 function CompareTable() {
   return (
     <div
@@ -210,7 +197,6 @@ function CompareTable() {
         </div>
       ))}
 
-      {/* 가입 버튼 행 */}
       <div
         className="grid gap-2 px-4 py-3"
         style={{
@@ -249,7 +235,6 @@ function CompareTable() {
   );
 }
 
-// ─── FAQ 섹션 ────────────────────────────────────────────────────
 function FAQSection() {
   const faqs = [
     {
@@ -262,7 +247,7 @@ function FAQSection() {
     },
     {
       q: "여러 거래소에 동시에 가입해도 되나요?",
-      a: "네, 가입 거래소마다 독립적으로 가입 혜택을 받을 수 있습니다. 분산 보관 관점에서도 여러 거래소를 활용하는 것이 안전합니다.",
+      a: "네, 각 거래소마다 독립적으로 가입 혜택을 받을 수 있습니다. 분산 보관 관점에서도 여러 거래소를 활용하는 것이 안전합니다.",
     },
   ];
 

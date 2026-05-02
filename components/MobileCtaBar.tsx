@@ -13,7 +13,7 @@ export default function MobileCtaBar() {
 
   const exchanges = [
     { id: "bybit",   name: "Bybit",   bonus: "$30,000", color: "#f7931a" },
-    { id: "bitget",  name: "Bitget",  bonus: "$8,000",  color: "#00c6ff" },
+    { id: "bitget",  name: "Bitget",  bonus: "$8,000",  color: "#00c7ff" },
     { id: "binance", name: "Binance", bonus: "$600",     color: "#f0b90b" },
   ];
 
@@ -32,7 +32,7 @@ export default function MobileCtaBar() {
 
   const ex = exchanges[activeIdx];
   const isPositive = btc ? btc.change24h >= 0 : true;
-  const btcChangeColor = isPositive ? "#22c55e" : "#ef4444";
+  const btcChangeColor = isPositive ? "#0ecb81" : "#f6465d";
 
   return (
     <>
@@ -44,14 +44,14 @@ export default function MobileCtaBar() {
         {btc && (
           <div
             className="flex items-center justify-center gap-2 py-1.5 text-xs"
-            style={{ background: "rgba(13,13,20,0.95)", borderTop: "1px solid rgba(30,30,48,0.8)" }}
+            style={{ background: "rgba(11,14,23,0.97)", borderTop: "1px solid rgba(28,35,51,0.8)" }}
           >
             <span className="text-white font-bold num">BTC ${btc.price.toLocaleString("en-US")}</span>
             <span style={{ color: btcChangeColor }}>{isPositive ? "+" : ""}{btc.change24h.toFixed(2)}%</span>
-            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#22c55e" }} />
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#0ecb81" }} />
           </div>
         )}
-        <div style={{ background: "rgba(13,13,20,0.97)", borderTop: "1px solid rgba(247,147,26,0.2)", paddingBottom: "env(safe-area-inset-bottom, 0px)" }}>
+        <div style={{ background: "rgba(11,14,23,0.98)", borderTop: "1px solid rgba(0,199,255,0.15)", paddingBottom: "env(safe-area-inset-bottom, 0px)" }}>
           <div className="flex items-center px-4 py-3 gap-3">
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-1.5 mb-0.5">
@@ -65,7 +65,7 @@ export default function MobileCtaBar() {
             </div>
             <div className="flex flex-col gap-1 items-center">
               {exchanges.map((_, i) => (
-                <div key={i} className="rounded-full transition-all duration-300" style={{ width: i === activeIdx ? 6 : 4, height: i === activeIdx ? 6 : 4, background: i === activeIdx ? ex.color : "#2a2a40" }} />
+                <div key={i} className="rounded-full transition-all duration-300" style={{ width: i === activeIdx ? 6 : 4, height: i === activeIdx ? 6 : 4, background: i === activeIdx ? ex.color : "#1c2333" }} />
               ))}
             </div>
             <a
@@ -92,12 +92,12 @@ export default function MobileCtaBar() {
         className="hidden sm:flex fixed bottom-6 right-6 z-50 flex-col gap-2 transition-all duration-300"
         style={{ transform: visible ? "translateY(0) scale(1)" : "translateY(20px) scale(0.9)", opacity: visible ? 1 : 0 }}
       >
-        <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ background: "rgba(13,13,20,0.97)", border: "1px solid rgba(247,147,26,0.25)", minWidth: 220 }}>
+        <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ background: "rgba(11,14,23,0.98)", border: "1px solid rgba(0,199,255,0.2)", minWidth: 220 }}>
           <div className="px-4 py-3">
             <div className="flex items-start justify-between gap-2 mb-3">
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: "#64748b" }}>신규 가입 혜택</p>
-                <p className="text-sm font-bold text-white mt-0.5">거래소 가입 시<br /><span style={{ color: "#f7931a" }}>최대 $30,000</span></p>
+                <p className="text-sm font-bold text-white mt-0.5">거래소 가입 시<br /><span style={{ color: "#00c7ff" }}>최대 $30,000</span></p>
               </div>
               <button onClick={() => setDismissed(true)} className="p-1 rounded-full flex-shrink-0" style={{ color: "#4a5568" }} aria-label="닫기">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
